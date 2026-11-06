@@ -1,0 +1,26 @@
+import random
+def playgame():
+ A=random.randint(1,100)
+ C=0
+ D=[]
+ E={}
+ while True:
+    B=int(input("请输入您的猜测："))
+    D.append(B)
+    C=C+1
+    E[B]=E.get(B,0)+1
+    if B>A:
+        print("本次猜测偏大，请再猜一次")
+    elif B<A:
+        print("本次猜测偏小，请再猜一次")
+    else:
+        print(f"恭喜您猜对了，您本回一共猜{C}次")
+        print("本回猜测过的数字为：")
+        print(sorted(list(set(D))))
+        for x in E:
+         print("数字",x,"猜了",E[x],"次")
+        break
+def main():
+   playgame()
+if __name__ == "__main__":
+    main()
