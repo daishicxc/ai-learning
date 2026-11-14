@@ -1,8 +1,11 @@
+import os
 import requests
-AI_KEY="sk-14ad417c476c42d28847e7a64f02e863"
+from dotenv import load_dotenv
+load_dotenv()
+API_KEY=os.getenv("DEEPSEEK_API_KEY")
 def ask_ai():
  问题=input("请输入对话：")
- headers={"Authorization":f"Bearer {AI_KEY}","Content_Type":"application/json"}
+ headers={"Authorization":f"Bearer {API_KEY}","Content_Type":"application/json"}
  data={"model":"deepseek-chat","messages":[{"role":"user","content":f"{问题}"}]}
  url="https://api.deepseek.com/chat/completions"
  r=requests.post(url,headers=headers,json=data)
