@@ -10,8 +10,7 @@ with open("long_doc.txt", "r", encoding="utf-8") as f:
 client = chromadb.PersistentClient(path="./my_vector_db")
 model_name ='BAAI/bge-small-zh-v1.5'
 chroma_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name=model_name)
-collection = client.get_or_create_collection(name="my_knowledge",
- embedding_function=chroma_ef)
+collection = client.get_or_create_collection(name="my_knowledge",embedding_function=chroma_ef)
 print("正在把文档存入数据库（自动转换为向量）...")
 collection.add(documents=lines,ids=[str(i) for i in range(len(lines))] )
 print("入库完成！")
