@@ -32,8 +32,11 @@ collection = client.get_or_create_collection(name="my_knowledge_pro", embedding_
 collection.add(documents=all_chunks,ids=[str(i) for i in range(len(all_chunks))])
 question = input("\n请输入关于这些文档的问题: ")
 results = collection.query(query_texts=[question],n_results=2) # 找最像的2块
-context = "\n---\n".join(results['documents'][0])
-print(f"\n检索到的知识：\n{context}\n")
+if results['documents'] and len(results['documents'][0]) > 0:
+    context = "\n---\n".join(results['documents'][0])
+    print(f"\n检索到的知识：\n{context}\n")
+else:
+    print("未检索到相关背景信息")
 prompt = f"""你是一个严谨的问答助手。请严格根据以下背景信息回答问题，如果找不到，就说不知道。
 【背景信息】：
 {context}
